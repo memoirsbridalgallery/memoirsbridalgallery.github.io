@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memoirs Bridal Gallery | Brickfields, KL</title>
+  <meta name="description" content="Memoirs Bridal Gallery – Your one-stop bridal service in Brickfields, KL. Wedding gown rental, photography, family portraits, car decoration & more. Est. 2009.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory: #faf6f1;
+      --champagne: #f0e6d3;
+      --rose-gold: #c9956c;
+      --deep-rose: #8b5a4a;
+      --charcoal: #2c2520;
+      --warm-grey: #6b6260;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      z-index: 100;
+      padding: 18px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,246,241,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,149,108,0.18);
+      transition: box-shadow 0.3s ease;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.07); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--deep-rose);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo span { font-style: italic; font-weight: 300; }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--rose-gold);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--rose-gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none; flex-direction: column;
+      cursor: pointer; gap: 5px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--charcoal);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: var(--ivory);
+      padding: 24px 32px;
+      flex-direction: column; gap: 22px;
+      border-bottom: 1px solid var(--champagne);
+      z-index: 99;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 0.82rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--charcoal); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-nav a:hover { color: var(--rose-gold); }
+
+    /* ─── HERO ─── */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0SQKMI5hAZTFKJ2EnEsnCtifRbugFcu9y8giDvSpIEtBaE3dixVYB1hnZcKHYHx79LihEt-taCaomdTjnbL3RCmQrZnorrT_JypY99GgW48YDNrUwE1ZuGidPciLhc8SgoZ9uteloOnBt315yMIH2B6tZZrW8ixCiM8I5yYpp2wdUvvo29oNetcmH7pV3a_FaFlwq1w_5kaYM8_ISRf7NGNYONnMnlyg7cepdkQ=w1280');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(44,28,20,0.25) 0%, rgba(44,28,20,0.62) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--white);
+      padding: 0 24px;
+      animation: fadeUp 1.3s cubic-bezier(.16,1,.3,1) forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+    }
+    .hero-title em { font-style: italic; color: #f5d6b8; }
+
+    .hero-sub {
+      font-size: 0.92rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 44px;
+      opacity: 0.82;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .hero-btns { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--rose-gold);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--deep-rose);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139,90,74,0.35);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.65);
+      color: white;
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+      animation: scrollBounce 2.4s ease infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px; height: 42px;
+      background: rgba(255,255,255,0.4);
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(9px); }
+    }
+
+    /* ─── ANNOUNCEMENT ─── */
+    .announcement {
+      background: var(--deep-rose);
+      color: white;
+      text-align: center;
+      padding: 13px 20px;
+      font-size: 0.79rem;
+      letter-spacing: 0.07em;
+      line-height: 1.5;
+    }
+    .announcement a { color: #f5d6b8; text-decoration: underline; }
+    .announcement strong { font-weight: 500; }
+
+    /* ─── SHARED SECTION ─── */
+    .section-label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      font-weight: 400;
+      line-height: 1.18;
+      color: var(--charcoal);
+      margin-bottom: 18px;
+    }
+    .section-rule {
+      width: 56px; height: 1px;
+      background: var(--rose-gold);
+      margin-bottom: 22px;
+    }
+    .section-body {
+      font-size: 0.94rem;
+      line-height: 1.85;
+      color: var(--warm-grey);
+      max-width: 520px;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      background: var(--champagne);
+    }
+    .about-img {
+      background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0SSqJmYtGC06e8ze0F7FMU3cg0-emBFcRU5k9y4OBq4MrvIQbSrP4Dph9G29EAD5vm5QK-H3csqe5kAWS2LnrqME6kriIRcBMYB1hwdzfQ4WDN2EK5yyhX-VkgpZvLGXejQUZDb5-OHJdNrL0Rzu01FACXrmjqMPbTR0Xqbju31e0f4QGGj_dNXJHK5yq4tvayIZUznS2_yyS5ZNyYCoMR8CxtgP8f-8B55KHdU=w1280');
+      background-size: cover;
+      background-position: center;
+    }
+    .about-text {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px;
+    }
+    .stats {
+      display: flex; gap: 40px;
+      margin-top: 36px;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--rose-gold); line-height: 1;
+    }
+    .stat-lbl {
+      font-size: 0.66rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm-grey);
+      margin-top: 5px;
+    }
+
+    /* ─── SERVICES ─── */
+    #services {
+      background: var(--white);
+      padding: 100px 40px;
+    }
+    .services-hdr {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .services-hdr .section-rule {
+      margin: 0 auto 22px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .svc-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+    .svc-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+      display: block;
+    }
+    .svc-card:hover img { transform: scale(1.06); }
+    .svc-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(44,28,20,0.88) 0%, rgba(44,28,20,0.1) 55%, transparent 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 24px;
+      color: white;
+    }
+    .svc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.38rem; font-weight: 400;
+      margin-bottom: 5px;
+    }
+    .svc-desc {
+      font-size: 0.73rem;
+      letter-spacing: 0.04em;
+      opacity: 0.78;
+      line-height: 1.5;
+    }
+    .services-cta {
+      text-align: center;
+      margin-top: 56px;
+    }
+
+    /* ─── PROMOTION ─── */
+    #promotion {
+      background: var(--charcoal);
+      padding: 100px 40px;
+      text-align: center;
+    }
+    #promotion .section-label { color: #f5d6b8; }
+    #promotion .section-title { color: white; }
+    #promotion .section-rule { margin: 0 auto 22px; }
+    #promotion .section-body { color: rgba(255,255,255,0.65); margin: 0 auto 48px; }
+
+    .promo-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,149,108,0.35);
+      padding: 48px 40px;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .promo-card p {
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 28px;
+    }
+    .promo-highlight {
+      color: #f5d6b8;
+      font-weight: 500;
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      padding: 100px 48px;
+      background: var(--ivory);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1060px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .contact-item {
+      display: flex; gap: 18px;
+      margin-bottom: 30px;
+      align-items: flex-start;
+    }
+    .c-icon {
+      width: 42px; height: 42px;
+      background: var(--champagne);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.1rem;
+    }
+    .c-detail h4 {
+      font-size: 0.67rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 6px;
+    }
+    .c-detail p, .c-detail a {
+      font-size: 0.9rem;
+      color: var(--warm-grey);
+      line-height: 1.65;
+      text-decoration: none;
+    }
+    .c-detail a:hover { color: var(--rose-gold); }
+
+    .wa-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    .wa-cta:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+    }
+
+    #contact iframe {
+      width: 100%; height: 340px;
+      border: 0;
+      filter: sepia(10%) saturate(80%);
+      display: block;
+    }
+    .map-label {
+      font-size: 0.74rem;
+      color: var(--warm-grey);
+      margin-top: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── FLOAT WA BUTTON ─── */
+    .float-wa {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.45);
+      z-index: 200;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      animation: waPulse 2.5s ease infinite;
+    }
+    .float-wa:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 32px rgba(37,211,102,0.6);
+    }
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 4px 40px rgba(37,211,102,0.7); }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      line-height: 1.8;
+    }
+    footer .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 6px;
+    }
+    footer a { color: var(--rose-gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── REVEAL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .about { grid-template-columns: 1fr; }
+      .about-img { min-height: 320px; }
+      .about-text { padding: 48px 28px; }
+
+      .services-grid { grid-template-columns: 1fr 1fr; }
+
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+
+      #services, #promotion, #contact { padding: 70px 24px; }
+    }
+
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .stats { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ FLOATING WHATSAPP ══ -->
+<a href="https://wa.me/60173432083" target="_blank" class="float-wa" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ══ NAVIGATION ══ -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Memoirs <span>Bridal Gallery</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#promotion">Promotion</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home"      onclick="toggleNav()">Home</a>
+  <a href="#about"     onclick="toggleNav()">About</a>
+  <a href="#services"  onclick="toggleNav()">Services</a>
+  <a href="#promotion" onclick="toggleNav()">Promotion</a>
+  <a href="#contact"   onclick="toggleNav()">Contact</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Est. 2009 &nbsp;·&nbsp; Jalan Vivekananda, Brickfields, KL</p>
+    <h1 class="hero-title">Memoirs<br><em>Bridal Gallery</em></h1>
+    <p class="hero-sub">Your one-stop bridal service — capturing the happiest moments of your lives</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn btn-primary">Explore Services</a>
+      <a href="https://wa.me/60173432083" target="_blank" class="btn btn-ghost">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ══ ANNOUNCEMENT ══ -->
+<div class="announcement">
+  📍 <strong>Our Address:</strong>&nbsp; 28-1, Jalan Vivekananda, Brickfields, 50470 Kuala Lumpur
+  &nbsp;·&nbsp;
+  <a href="https://wa.me/60173432083?text=Hi!%20Can%20you%20send%20me%20directions%20to%20your%20location%3F">WhatsApp us for directions →</a>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div id="about" class="about reveal">
+  <div class="about-img"></div>
+  <div class="about-text">
+    <span class="section-label">Our Story</span>
+    <h2 class="section-title">A Legacy of Beautiful Moments</h2>
+    <div class="section-rule"></div>
+    <p class="section-body">
+      Established in 2009, Memoirs Bridal Gallery has been the trusted partner for couples and families across Kuala Lumpur.
+      From stunning bridal gown rentals to timeless wedding photography, we are dedicated to making every moment unforgettable.
+      Visit our showroom at 28-1, Jalan Vivekananda, Brickfields to experience our full collection.
+    </p>
+    <div class="stats">
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-lbl">Years of Service</div>
+      </div>
+      <div>
+        <div class="stat-num">7</div>
+        <div class="stat-lbl">Services Offered</div>
+      </div>
+      <div>
+        <div class="stat-num">KL</div>
+        <div class="stat-lbl">Brickfields</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="services-hdr reveal">
+    <span class="section-label">What We Offer</span>
+    <h2 class="section-title">Our Services</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="services-grid">
+    <div class="svc-card reveal">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQKMI5hAZTFKJ2EnEsnCtifRbugFcu9y8giDvSpIEtBaE3dixVYB1hnZcKHYHx79LihEt-taCaomdTjnbL3RCmQrZnorrT_JypY99GgW48YDNrUwE1ZuGidPciLhc8SgoZ9uteloOnBt315yMIH2B6tZZrW8ixCiM8I5yYpp2wdUvvo29oNetcmH7pV3a_FaFlwq1w_5kaYM8_ISRf7NGNYONnMnlyg7cepdkQ=w1280" alt="Wedding Dress & Gown Rental" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Wedding Dress & Gown Rental</h3>
+        <p class="svc-desc">Wedding, Evening & Prom dresses. Visit our showroom to view our collection.</p>
+      </div>
+    </div>
+
+    <div class="svc-card reveal">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQ26CPSxKHeR5W_3nV5zPmN1UDWVF3k1L4_nIrXBpjdG0CQOhiJ_6xI5Ii2P217pOw5CK-kF7C2pDk1YKnz_ooLqXL1kMFvyCkpkslCKzLIdlKhJTGyioVPDv4VpbegEJNfuMFZPVk7ftb_1lkWk7Qjq0abiZCv-zKHVlHIUTVklvtUxLWcCHcuJRHooU4Ph-PH_Gt5Fo7yF-94I8geJvfqH-zoo91I3_Qf=w1280" alt="Wedding Photography" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Wedding Photography</h3>
+        <p class="svc-desc">Timeless photos capturing every precious moment of your special day.</p>
+      </div>
+    </div>
+
+    <div class="svc-card reveal">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQmTVs6raOeoK7cmYhM8JEZ3_bCHLnjco1cdWqyxF1Ts8tfEC2COipI5bNm5uI7QmXoW8a_rqDvn8bO_hEcwESFjCaMU6_-WtllwdyW2ZkmPn_BS9OWlmsQVFkzkmZvFXxKBbQJa0o7QvepawjD4jqhcJLtKEc0JYFGbRzLf8tvmfSelNsrcQN5qryezoCHhJTVDF4TSGdStyqrLFLWc4OBWMXf66mmPnK6rz0=w1280" alt="Solo Photography" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Solo Photography</h3>
+        <p class="svc-desc">Professional individual portrait sessions in our studio.</p>
+      </div>
+    </div>
+
+    <div class="svc-card reveal">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQlqUWWMEBsHQWh-QzIWM8PI7KCKrtbUgiiSTC0nCnMcLvSl4oPGnZFv5fnaOgWcA0J9JbC7p5ZVHf9MaKJED1eNecMwXk6bmzDt8--a0HQodagqMfVNa8JnxqtWaMdS21bVGQ2MG5iCyH1ZgG1kO_ghDOgFrxzglNZv-TNwK7BZqqzYSlMOBGfMCU=w1280" alt="Family Photos" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Family Photos</h3>
+        <p class="svc-desc">Cherish your family memories with beautiful portrait sessions.</p>
+      </div>
+    </div>
+
+    <div class="svc-card reveal">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSeQzL3KI_GjJJeJ4nAQn4DGwc6tFWHR4RjzTvaXn-aSlSqw2Ujzb0Vx_saXTXPkbwc6CWIGVMj8zhm5KIcOLHwrrwk5p49BLHfUfnjinSWt1dazTIpjGFDhFeC387oL-Q6fMb_0NPtetiJMfQ8WpYxQGGlJhyfpV8jOTar5_5o4DV2Mdr-0Vd8-chg4hH7zT0FNwoe2s8VhpM6RcFVVDIJ2N0EioC6hZsc=w1280" alt="Baby Photos" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Baby Photos</h3>
+        <p class="svc-desc">Precious newborn and baby portrait sessions to treasure forever.</p>
+      </div>
+    </div>
+
+    <div class="svc-card reveal">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STcHT9Org-gTizHMvsSLci0nBuhAHdGZ0NglUu3sCUI9Az3CoRXLXCDUlaMhPm5P4jbp_xP-2io-b_75yR0uL2iOGkTypmHKNiB5L8UCHmdUIhIqppOxE4lm8Egn3ViG_DSR6e7wDzWrQmg-8R9WLLHEtDDMRGykrWIwQUKrIllkzHyjtcJ0h8PWc_JhmLjPk_D_ffGT5Lxe18N1VWMXfzBGtoS38KAdhHPzGQ=w1280" alt="Wedding Car Decoration" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Wedding Car Decoration</h3>
+        <p class="svc-desc">Beautiful floral and ribbon arrangements for your bridal car.</p>
+      </div>
+    </div>
+
+    <div class="svc-card reveal" style="grid-column: 2;">
+      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSu4grgwRR6IoKuYmYnn2rRFxcurJe5VYUs4U1i2x50YGITJg4WE_lz9dzR5e91h-dCCpkJr3lmUOFlXcZ8E08QDtm3zz6trK0ls4UGQCYvLIEPM-lwfq7Cj2feeAz6uNenDA7T2i1_gtdlFEJOAZDnMmZip8BA4lk5sWzt1xTJRjKAYHvpbJu22v_345kw0Gh2dnT7Z2TuuSjcZRkS_1lULxrGTls9Iqvty6U=w1280" alt="Photo Restoration" loading="lazy">
+      <div class="svc-overlay">
+        <h3 class="svc-title">Photo Restoration</h3>
+        <p class="svc-desc">Bringing your precious old photos back to life with care.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="services-cta reveal">
+    <a href="https://wa.me/60173432083?text=Hi!%20I%20would%20like%20to%20enquire%20about%20your%20services." target="_blank" class="btn btn-primary">Enquire via WhatsApp</a>
+  </div>
+</section>
+
+<!-- ══ PROMOTION ══ -->
+<section id="promotion">
+  <span class="section-label">Special Offers</span>
+  <h2 class="section-title">Current Promotions</h2>
+  <div class="section-rule"></div>
+  <p class="section-body">
+    We run exclusive promotions throughout the year — from wedding packages to photoshoot bundles.
+    Chat with us on WhatsApp to find out what's available right now.
+  </p>
+  <div class="promo-card reveal">
+    <span class="promo-highlight">Ask us about our latest deals!</span>
+    <p>
+      We offer special packages for wedding photography, gown rental bundles, family photoshoots, and more.
+      Promotions are updated regularly — contact us today so you don't miss out.
+    </p>
+    <a href="https://wa.me/60173432083?text=Hi!%20I%20would%20like%20to%20know%20about%20your%20current%20promotions." target="_blank" class="btn btn-primary">Chat With Us Now</a>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Visit Us or Say Hello</h2>
+      <div class="section-rule"></div>
+
+      <div class="contact-item">
+        <div class="c-icon">📍</div>
+        <div class="c-detail">
+          <h4>Our Address</h4>
+          <p>28-1, Jalan Vivekananda,<br>Brickfields, 50470 Kuala Lumpur</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="c-icon">📞</div>
+        <div class="c-detail">
+          <h4>Phone / WhatsApp</h4>
+          <p><a href="tel:+60173432083">017 – 343 2083</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="c-icon">✉️</div>
+        <div class="c-detail">
+          <h4>Email</h4>
+          <p><a href="mailto:memoirsbridalgallery@gmail.com">memoirsbridalgallery@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="c-icon">🕐</div>
+        <div class="c-detail">
+          <h4>Opening Hours</h4>
+          <p>Tuesday – Sunday: 10:00 am – 8:00 pm<br>Closed on Mondays</p>
+        </div>
+      </div>
+
+      <a href="https://wa.me/60173432083?text=Hi%20Memoirs%20Bridal%20Gallery!%20I%20would%20like%20to%20make%20an%20enquiry." target="_blank" class="wa-cta">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp Us Now
+      </a>
+    </div>
+
+    <div class="reveal">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.031!2d101.6868!3d3.1320!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4a3d75555555%3A0x0!2s28-1%2C%20Jalan%20Vivekananda%2C%20Brickfields%2C%2050470%20Kuala%20Lumpur!5e0!3m2!1sen!2smy!4v1"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Memoirs Bridal Gallery Location Map">
+      </iframe>
+      <p class="map-label">📌 28-1, Jalan Vivekananda, Brickfields, 50470 KL</p>
+      <img
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SSdWhM3A_9Avq9LqRYBHu2G8J3zGExGM4UcgykIya4eOvZA7jzjaD3ZhxI_pxSC5BEY12Djzid8iKuznwpRrjb4yMOLIzBdzOXPZwEHUJ5_iCezvHWpys6xpY6GU5_AmylsurYY_auzWTzt40H_sU6_FXJgb-umK-Lxhg-dnHuVE1kOVOEFIGzeqjFiElvDJ04kT5HLErtFvA_ARnzYYXCXBiDXm01Ys0i1Lsk=w1280"
+        alt="Memoirs Bridal Gallery shopfront"
+        style="width:100%; margin-top:12px; display:block; object-fit:cover; max-height:220px;"
+        loading="lazy"
+      >
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p class="footer-brand">Memoirs Bridal Gallery</p>
+  <p>© 2025 Memoirs Bridal Gallery &nbsp;·&nbsp; Established 2009 &nbsp;·&nbsp; 28-1, Jalan Vivekananda, Brickfields, 50470 KL</p>
+  <p style="margin-top:6px;">
+    <a href="tel:+60173432083">017-343 2083</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:memoirsbridalgallery@gmail.com">memoirsbridalgallery@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://wa.me/60173432083">WhatsApp</a>
+  </p>
+</footer>
+
+<script>
+  // Sticky nav shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile nav toggle
+  function toggleNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  document.addEventListener('click', (e) => {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    if (!nav.contains(e.target) && !btn.contains(e.target)) {
+      nav.classList.remove('open');
+    }
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
